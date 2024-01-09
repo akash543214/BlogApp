@@ -1,6 +1,21 @@
 import conf from '../conf/conf.js';
 import { Client, ID, Databases, Storage, Query } from "appwrite";
-
+function getCurrentDate() {
+    const today = new Date();
+  
+    const day = today.getDate();
+    const month = today.getMonth() + 1; 
+    const year = today.getFullYear() % 100; 
+  
+    const formattedDay = (day < 10) ? '0' + day : day;
+    const formattedMonth = (month < 10) ? '0' + month : month;
+    const formattedYear = (year < 10) ? '0' + year : year;
+  
+   
+    const currentDate = `${formattedDay}/${formattedMonth}/${formattedYear}`;
+  
+    return currentDate;
+  }
 export class Service
 {
     client = new Client();
@@ -15,7 +30,8 @@ export class Service
         this.bucket = new Storage(this.client);
     }
 
-    async createPost({title, slug, content, featuredImage, status, userId}){
+    async createPost({title, slug, content, featuredImage, status, userId,author}){
+        const date = getCurrentDate()
         try {
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
@@ -26,8 +42,9 @@ export class Service
                     content,
                     status,
                     featuredImage,
-                    userId
-                    
+                    userId,
+                    author,
+                    date
                 }
             )
         } catch (error) {
@@ -35,7 +52,8 @@ export class Service
         }
     }
 
-    async updatePost(slug, {title, content, featuredImage, status}){
+    async updatePost(slug, {title, content, featuredImage, status,author}){
+        const date = getCurrentDate()
         try {
             return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
@@ -46,6 +64,8 @@ export class Service
                     content,
                     featuredImage,
                     status,
+                    author,
+                    date
 
                 }
             )
