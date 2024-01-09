@@ -57,7 +57,7 @@ export class AuthService {
     async googleAuth() {
 
         try {
-           return await this.account.createOAuth2Session('google', 'http://localhost:5173', 'http://localhost:5173/login');
+           return await this.account.createOAuth2Session('google', 'https://celadon-griffin-fbffd2.netlify.app', 'https://celadon-griffin-fbffd2.netlify.app/login');
 
         } catch (error) {
             console.log("Appwrite serive :: logout :: error", error);
