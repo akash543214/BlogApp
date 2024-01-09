@@ -57,7 +57,7 @@ export class AuthService {
     async googleAuth() {
 
         try {
-           return await this.account.createOAuth2Session('google', 'https://cloud.appwrite.io/', 'https://cloud.appwrite.io/v1/account/sessions/oauth2/callback/google/655cb434ba462e6c01ed');
+           return await this.account.createOAuth2Session('google', 'https://cloud.appwrite.io/', 'https://celadon-griffin-fbffd2.netlify.app/v1/account/sessions/oauth2/callback/google/655cb434ba462e6c01ed');
 
         } catch (error) {
             console.log("Appwrite serive :: logout :: error", error);
